@@ -1,4 +1,4 @@
-# TypeScript Node Server Deployed in Vercel
+# TypeScript Node Server Deployed to Vercel
 
 ## Demo Link
 
