@@ -32,6 +32,8 @@ app.listen(port, () => console.log(`Server running on ${port}, http://localhost:
 
 2. `npm run start`: compile TypeScript to JavaScript and start running local server
 
+3. `npm run lint`: check lint manually
+
 ## Deployment
 
 1. `npm run build`: compile `src/app.ts` to `dist/app.js`
