@@ -2,7 +2,7 @@
   "name": "node-ts-server-in-vercel",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.ts",
+  "main": "src/app.ts",
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "start": "npm run build && node dist/app.js",
@@ -10,10 +10,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andy770921/node-server-in-Vercel.git"
+    "url": "git+https://github.com/andy770921/node-ts-server-in-Vercel.git"
   },
   "keywords": [
-    "nodeJS",
+    "node.js",
+    "express",
+    "TypeScript",
     "server",
     "deploy",
     "Vercel"
@@ -21,9 +23,9 @@
   "author": "andy chou",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/andy770921/node-server-in-Vercel/issues"
+    "url": "https://github.com/andy770921/node-ts-server-in-Vercel/issues"
   },
-  "homepage": "https://github.com/andy770921/node-server-in-Vercel#readme",
+  "homepage": "https://github.com/andy770921/node-ts-server-in-Vercel#readme",
   "dependencies": {
     "express": "^4.17.1"
   },
