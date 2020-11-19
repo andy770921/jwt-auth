@@ -1,2 +1,11 @@
-node_modules
+# dependencies
+/node_modules
+
+# misc
+.DS_Store
+
+# vercel
 .vercel
+
+# compiled js file
+/dist
