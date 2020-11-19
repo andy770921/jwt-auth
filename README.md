@@ -1,5 +1,11 @@
 # TypeScript Node Server Deployed in Vercel
 
+## Demo Link
+
+- Home Page: https://node-ts-server-in-vercel.andy770921.vercel.app/
+
+- About Page: https://node-ts-server-in-vercel.andy770921.vercel.app/about
+
 ## TypeScript Node Server Example
 
 ```ts
@@ -28,9 +34,9 @@ app.listen(port, () => console.log(`Server running on ${port}, http://localhost:
 
 ## Deployment
 
-1. `npm run build`: compile TypeScript to JavaScript
+1. `npm run build`: compile `src/app.ts` to `dist/app.js`
 
-2. [Vercel](https://vercel.com/) takes `dist/app.js` for deployment defined in `vercel.json`
+2. [Vercel](https://vercel.com/) takes `src/app.ts` and compiled automatically for deployment defined in `vercel.json`
 
 ## Reference Tutorial
 
