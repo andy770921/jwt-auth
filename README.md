@@ -17,9 +17,7 @@ app.get('/', (req, res) => res.send('Home Page Route'));
 
 app.get('/about', (req, res) => res.send('About Page Route'));
 
-app.get('/portfolio', (req, res) => res.send('Portfolio Page Route'));
-
-app.get('/contact', (req, res) => res.send('Contact Page Route'));
+app.get('/api', (req, res) => res.status(200).json({ data: 'api' }));
 
 const port = process.env.PORT || 3000;
 
@@ -42,5 +40,9 @@ app.listen(port, () => console.log(`Server running on ${port}, http://localhost:
 
 ## Reference Tutorial
 
-[Deploying Apollo Server with TypeScript Path Aliases to Vercel](https://dev.to/ozanbolel/deploying-apollo-server-with-typescript-path-aliases-to-vercel-4k5l)
+- [Deploying Apollo Server with TypeScript Path Aliases to Vercel](https://dev.to/ozanbolel/deploying-apollo-server-with-typescript-path-aliases-to-vercel-4k5l)
+
+- [How to set up an Express.js API using Webpack and TypeScript](https://medium.com/the-andela-way/how-to-set-up-an-express-api-using-webpack-and-typescript-69d18c8c4f52)
+
+- [nodemon-webpack-plugin](https://www.npmjs.com/package/nodemon-webpack-plugin)
 
