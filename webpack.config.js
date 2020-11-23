@@ -1,8 +1,8 @@
 const path = require('path'); 
 const nodeExternals = require('webpack-node-externals');
+const NodemonPlugin = require('nodemon-webpack-plugin');
 
 module.exports = {
-    mode: 'production',
     entry: './src/app.ts',
     target: "node",
     externals: [nodeExternals()],
@@ -10,6 +10,11 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'app.js'
     },
+    plugins: [
+        new NodemonPlugin({
+            watch: path.resolve('./dist')
+        })
+    ],
     module: {
         rules: [
             {
