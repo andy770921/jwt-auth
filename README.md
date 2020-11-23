@@ -6,6 +6,8 @@
 
 - About Page: https://node-ts-server-in-vercel.andy770921.vercel.app/about
 
+- API: https://node-ts-server-in-vercel.andy770921.vercel.app/api
+
 ## TypeScript Node Server Example
 
 ```ts
@@ -32,11 +34,11 @@ app.listen(port, () => console.log(`Server running on ${port}, http://localhost:
 
 3. `npm run lint`: check lint manually
 
-## Deployment
+## Build and Deployment
 
 1. `npm run build`: compile `src/app.ts` to `dist/app.js`
 
-2. [Vercel](https://vercel.com/) takes `src/app.ts` and compiled automatically for deployment defined in `vercel.json`
+2. Deploy to Vercel: [Vercel](https://vercel.com/) takes `src/app.ts` and compiles TypeScript to JavaScript automatically for deployment. Detail settings are in the file `vercel.json`.
 
 ## Reference Tutorial
 
