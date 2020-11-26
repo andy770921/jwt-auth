@@ -9,3 +9,6 @@
 
 # compiled js file
 /dist
+
+# env file
+.env

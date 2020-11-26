@@ -25,7 +25,14 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, () => console.log(`Server running on ${port}, http://localhost:${port}`));
 ```
+## .env MONGO_DB_URL settings:
 
+- Ref: https://docs.mongodb.com/manual/reference/connection-string/
+
+- Example:
+```
+MONGO_DB_URL=mongodb+srv://[account]:[password]@cluster0.4xneo.gcp.mongodb.net/
+```
 ## Install and Development
 
 1. `npm install`
