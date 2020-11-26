@@ -1,8 +1,14 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import authRouter from './routes/authRoutes';
 
 const app = express();
 
+// middleware
+
+app.use(express.json());
+
+// database connection
 (async () => {
   try {
     await mongoose.connect(process.env.MONGO_DB_URL!, {
@@ -15,8 +21,7 @@ const app = express();
   }
 })();
 
+// Routes
 app.get('/', (req, res) => res.send('Home Page Route'));
 
-app.get('/about', (req, res) => res.send('About Page Route'));
-
-app.get('/api', (req, res) => res.status(200).json({ data: 'api' }));
+app.use(authRouter);
