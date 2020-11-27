@@ -15,10 +15,6 @@ import express from 'express';
 
 const app = express();
 
-app.get('/', (req, res) => res.send('Home Page Route'));
-
-app.get('/about', (req, res) => res.send('About Page Route'));
-
 app.get('/api', (req, res) => res.status(200).json({ data: 'api' }));
 
 const port = process.env.PORT || 3000;
@@ -29,9 +25,14 @@ app.listen(port, () => console.log(`Server running on ${port}, http://localhost:
 
 - Ref: https://docs.mongodb.com/manual/reference/connection-string/
 
+- Url:
+```
+MONGO_DB_URL=mongodb+srv://[account]:[password]@[cluster_name].4xneo.gcp.mongodb.net/[db_name]
+```
+
 - Example:
 ```
-MONGO_DB_URL=mongodb+srv://[account]:[password]@cluster0.4xneo.gcp.mongodb.net/
+MONGO_DB_URL=mongodb+srv://myAccount:myPw@cluster0.4xneo.gcp.mongodb.net/node-auth
 ```
 ## Install and Development
 
