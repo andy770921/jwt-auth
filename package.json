@@ -29,7 +29,8 @@
   "homepage": "https://github.com/andy770921/node-ts-server-in-Vercel#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.10.16"
+    "mongoose": "^5.10.16",
+    "validator": "^13.1.17"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
