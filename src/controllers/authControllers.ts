@@ -2,6 +2,11 @@ import { Request, Response } from 'express';
 import { Error as MongooseError } from 'mongoose';
 import UserModel from '../models/user';
 
+interface ErrorResponseBody<T = undefined>{
+  reason: string;
+  message?: string;
+  data: T;
+}
 interface ValidationError extends Error {
   message: string;
   code: number;
@@ -12,25 +17,25 @@ interface ValidationError extends Error {
   _message: string;
 }
 
-interface ErrorNameMessageMapping {
+interface ValidationResponsedData {
   email: string;
   password: string;
 }
 
-const handleErrors = (err: ValidationError): ErrorNameMessageMapping => {
+const handleErrors = (err: ValidationError): ErrorResponseBody<ValidationResponsedData> => {
   // duplicate error code
   if (err.code === 11000) {
-    return { email: 'that email is already registered', password: '' };
+    return { reason: 'emailDuplicated', data: { email: 'that email is already registered', password: '' } };
   }
   // validation errors
   if (err.message.includes('user validation failed')) {
     const errorCollection = Object.values(err.errors).reduce((collection, errorItem) => (
       { ...collection, [errorItem.path]: errorItem.properties.message }
     ), {});
-    return errorCollection as ErrorNameMessageMapping;
+    return { reason: 'invalidFormat', data: errorCollection } as ErrorResponseBody<ValidationResponsedData>;
   }
 
-  return { email: '', password: '' };
+  return { reason: '', data: { email: '', password: '' } };
 };
 
 export const signupGet = (req: Request, res: Response) => res.status(200).json({ data: 'signup get' });
@@ -41,8 +46,8 @@ export const signupPost = async (req: Request, res: Response) => {
     const { _id: createdId, email: createdEmail } = await UserModel.create({ email, password });
     res.status(201).json({ result: 'Success', user: { id: createdId, email: createdEmail } });
   } catch (err) {
-    const errorDetail = handleErrors(err);
-    res.status(400).json({ reason: 'createUserFail', data: errorDetail });
+    const errorResponseBody = handleErrors(err);
+    res.status(400).json(errorResponseBody);
   }
 };
 
