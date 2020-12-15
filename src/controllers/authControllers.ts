@@ -31,8 +31,8 @@ const handleErrors = (err: ValidationError): ErrorResponseBody<ValidationRespons
   if (err.message.includes('user validation failed')) {
     const errorCollection = Object.values(err.errors).reduce((collection, errorItem) => (
       { ...collection, [errorItem.path]: errorItem.properties.message }
-    ), {});
-    return { reason: 'invalidFormat', data: errorCollection } as ErrorResponseBody<ValidationResponsedData>;
+    ), { email: '', password: '' });
+    return { reason: 'invalidFormat', data: errorCollection };
   }
 
   return { reason: '', data: { email: '', password: '' } };
