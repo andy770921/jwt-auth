@@ -1,5 +1,6 @@
 import { Schema, model, Document } from 'mongoose';
 import isEmail from 'validator/lib/isEmail';
+import bcrypt from 'bcrypt';
 
 interface User extends Document {
   email: string;
@@ -23,7 +24,9 @@ const userSchema = new Schema({
 
 // functions fired before docs saved to db
 
-userSchema.pre('save', function (next) {
+userSchema.pre<User>('save', async function (next) {
+  const salt = await bcrypt.genSalt();
+  this.password = await bcrypt.hash(this.password, salt);
   console.log('user about to be created', this);
   next();
 });
