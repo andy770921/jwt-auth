@@ -21,6 +21,20 @@ const userSchema = new Schema({
   },
 });
 
+// functions fired before docs saved to db
+
+userSchema.pre('save', function (next) {
+  console.log('user about to be created', this);
+  next();
+});
+
+// functions fired after docs saved to db
+
+userSchema.post('save', (doc, next) => {
+  console.log('new user was created and saved', doc);
+  next();
+});
+
 const UserModel = model<User>('user', userSchema);
 
 export default UserModel;
