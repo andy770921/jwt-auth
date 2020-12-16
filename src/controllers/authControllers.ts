@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { Error as MongooseError } from 'mongoose';
+import jwt from 'jsonwebtoken';
 import UserModel from '../models/user';
 
 interface ErrorResponseBody<T = undefined>{
@@ -21,6 +22,12 @@ interface ValidationResponsedData {
   email: string;
   password: string;
 }
+
+const maxAge = 3 * 24 * 60 * 60;
+
+const createJwtToken = (id: string) => jwt.sign({ id }, process.env.JWT_SIGNATURE!, {
+  expiresIn: maxAge,
+});
 
 const handleErrors = (err: ValidationError): ErrorResponseBody<ValidationResponsedData> => {
   // duplicate error code
@@ -44,6 +51,9 @@ export const signupPost = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   try {
     const { _id: createdId, email: createdEmail } = await UserModel.create({ email, password });
+    const token = createJwtToken(createdId);
+
+    res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ result: 'Success', user: { id: createdId, email: createdEmail } });
   } catch (err) {
     const errorResponseBody = handleErrors(err);
