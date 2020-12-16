@@ -1,5 +1,5 @@
 import { Schema, model, Document } from 'mongoose';
-import { isEmail } from 'validator';
+import isEmail from 'validator/lib/isEmail';
 
 interface User extends Document {
   email: string;
