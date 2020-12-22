@@ -65,7 +65,6 @@ export const loginPost = async (req: Request, res: Response) => {
     const { _id: id } = await UserModel.login(email, password);
     res.status(200).json({ result: 'Success', user: id });
   } catch (err) {
-    console.log(err);
     res.status(400).json({ result: 'Fail', message: err.message });
   }
 };
