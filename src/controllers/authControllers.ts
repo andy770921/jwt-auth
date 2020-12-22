@@ -45,8 +45,6 @@ const handleErrors = (err: ValidationError): ErrorResponseBody<ValidationRespons
   return { reason: 'unexpectedError', message: err.message, data: { email: '', password: '' } };
 };
 
-export const signupGet = (req: Request, res: Response) => res.status(200).json({ data: 'signup get' });
-
 export const signupPost = async (req: Request, res: Response) => {
   const { email, password } = req.body;
   try {
@@ -61,9 +59,13 @@ export const signupPost = async (req: Request, res: Response) => {
   }
 };
 
-export const loginGet = (req: Request, res: Response) => res.status(200).json({ data: 'login get' });
-
-export const loginPost = (req: Request, res: Response) => {
-  console.log(req.body);
-  res.status(200).json({ result: 'Success' });
+export const loginPost = async (req: Request, res: Response) => {
+  const { email, password } = req.body;
+  try {
+    const { _id: id } = await UserModel.login(email, password);
+    res.status(200).json({ result: 'Success', user: id });
+  } catch (err) {
+    console.log(err);
+    res.status(400).json({ result: 'Fail', message: err.message });
+  }
 };

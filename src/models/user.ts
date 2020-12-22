@@ -1,10 +1,16 @@
-import { Schema, model, Document } from 'mongoose';
+import {
+  Schema, model, Document, Model,
+} from 'mongoose';
 import isEmail from 'validator/lib/isEmail';
 import bcrypt from 'bcrypt';
 
-interface User extends Document {
+interface UserDocumentInterface extends Document {
   email: string;
   password: string;
+}
+
+interface UserModelInterface extends Model<UserDocumentInterface> {
+  login(email: string, password: string): any;
 }
 
 const userSchema = new Schema({
@@ -24,7 +30,7 @@ const userSchema = new Schema({
 
 // functions fired before docs saved to db
 
-userSchema.pre<User>('save', async function (next) {
+userSchema.pre<UserDocumentInterface>('save', async function (next) {
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);
   console.log('user about to be created', this);
@@ -38,6 +44,20 @@ userSchema.post('save', (doc, next) => {
   next();
 });
 
-const UserModel = model<User>('user', userSchema);
+// static method to login user
+
+userSchema.statics.login = async function (email: string, password: string | number) {
+  const user = await this.findOne({ email });
+  if (user) {
+    const auth = await bcrypt.compare(password.toString(), user.password);
+    if (auth) {
+      return user;
+    }
+    throw Error('incorrect password');
+  }
+  throw Error('incorrect email');
+};
+
+const UserModel = model<UserDocumentInterface, UserModelInterface>('user', userSchema);
 
 export default UserModel;
