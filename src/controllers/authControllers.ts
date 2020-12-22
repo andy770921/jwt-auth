@@ -42,7 +42,7 @@ const handleErrors = (err: ValidationError): ErrorResponseBody<ValidationRespons
     return { reason: 'invalidFormat', data: errorCollection };
   }
 
-  return { reason: '', data: { email: '', password: '' } };
+  return { reason: 'unexpectedError', message: err.message, data: { email: '', password: '' } };
 };
 
 export const signupGet = (req: Request, res: Response) => res.status(200).json({ data: 'signup get' });
